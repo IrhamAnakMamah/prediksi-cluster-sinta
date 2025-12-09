@@ -8,22 +8,20 @@
 
 Repository ini berisi sekumpulan alat simulasi berbasis **Streamlit** yang dirancang untuk membantu Perguruan Tinggi dalam memprediksi dan mensimulasikan skor SINTA (Science and Technology Index).
 
-Tujuan utama dari alat ini adalah untuk **merancang strategi pemeringkatan**, khususnya untuk membantu universitas menganalisis celah poin yang dibutuhkan agar dapat menempati posisi **Cluster Mandiri**. Dengan alat ini, pengguna dapat memanipulasi variabel input (seperti jumlah publikasi, hibah penelitian, atau HKI) untuk melihat dampaknya terhadap skor total yang telah dinormalisasi.
+Tujuan utama dari alat ini adalah untuk **merancang strategi pemeringkatan**, khususnya untuk membantu universitas menganalisis celah poin yang dibutuhkan agar dapat menempati posisi **Cluster Mandiri**. Dengan alat ini, pengguna dapat memanipulasi variabel input untuk melihat dampaknya terhadap skor total yang telah dinormalisasi.
 
 ## 🚀 Fitur & Modul Simulasi
 
-Saat ini, repository menyediakan simulasi perhitungan untuk 4 komponen utama penilaian SINTA. Setiap modul menghitung **Skor Raw** dan **Skor Ternormalisasi** berdasarkan rumus terbaru.
+Saat ini, repository menyediakan simulasi perhitungan untuk seluruh komponen utama penilaian SINTA. Setiap modul menghitung **Skor Raw** dan **Skor Ternormalisasi** berdasarkan rumus terbaru.
 
 ### 1. 📚 Simulasi Publikasi (`publikasi.py`)
 Menghitung skor berdasarkan produktivitas publikasi ilmiah.
 * **Indikator:** Artikel Jurnal Internasional (Q1-Q4, Non-Q), Jurnal Nasional (S1-S6), Prosiding, Sitasi, dan Buku.
-* **Fitur:** Visualisasi breakdown skor antara Internasional, Nasional, dan Lainnya.
 * **Normalisasi:** Menggunakan pembagi *1776.69*.
 
 ### 2. 🔬 Simulasi Research / Penelitian (`research.py`)
 Menghitung skor kinerja penelitian dosen.
 * **Indikator:** Hibah Luar Negeri, Hibah Eksternal, Hibah Internal, dan Total Dana Penelitian (Rupiah).
-* **Fitur:** Input nilai rupiah dalam juta untuk presisi perhitungan.
 * **Normalisasi:** Menggunakan pembagi *261,491.37*.
 
 ### 3. 💡 Simulasi HKI (`hki.py`)
@@ -33,9 +31,24 @@ Menghitung skor luaran Hak Kekayaan Intelektual.
 
 ### 4. 🏛️ Simulasi Kelembagaan (`kelembagaan.py`)
 Menghitung skor kinerja kelembagaan institusi.
-* **Indikator:** Akreditasi Prodi (Unggul/A/Baik Sekali) dan Jumlah Jurnal Terakreditasi yang dikelola institusi.
+* **Indikator:** Akreditasi Prodi (Unggul/A/Baik Sekali) dan Jumlah Jurnal Terakreditasi.
 * **Logika Khusus:** Menerapkan faktor penyesuaian (30%) sebelum normalisasi.
 * **Normalisasi:** Menggunakan pembagi *2181.33*.
+
+### 5. 🤝 Simulasi Pengabdian Masyarakat (`abdimas.py`)
+Menghitung skor kinerja pengabdian kepada masyarakat (Community Service).
+* **Indikator:** Pengabdian Internasional, Nasional, Lokal, dan Jumlah Dana (Juta Rupiah).
+* **Normalisasi:** Menggunakan pembagi *447,937.99*.
+
+### 6. 👥 Simulasi SDM (`sdm.py`)
+Menghitung skor berdasarkan kualifikasi Sumber Daya Manusia.
+* **Indikator:** Reviewer Jurnal (Internasional/Nasional) dan Jabatan Fungsional Dosen (Guru Besar s.d. Non JAFA).
+* **Normalisasi:** Menggunakan pembagi *2.443*.
+
+### 7. 🏆 Main Dashboard (`main.py`) - *[BETA / WIP]*
+Navigasi terpusat yang menggabungkan seluruh modul di atas untuk melihat prediksi total skor akhir.
+* **Status:** *Under Construction* (Sedang dalam perbaikan error integrasi).
+* **Fitur:** Navigasi Sidebar dan kalkulasi persentase kelulusan Cluster Mandiri.
 
 ---
 
@@ -50,7 +63,7 @@ Menghitung skor kinerja kelembagaan institusi.
 
 ## 💻 Cara Menjalankan (Installation)
 
-Pastikan Anda sudah menginstall Python. Ikuti langkah berikut untuk menjalankan simulator di komputer lokal Anda:
+Pastikan Anda sudah menginstall Python. Ikuti langkah berikut:
 
 1.  **Clone Repository**
     ```bash
@@ -64,25 +77,43 @@ Pastikan Anda sudah menginstall Python. Ikuti langkah berikut untuk menjalankan 
     ```
 
 3.  **Jalankan Aplikasi**
-    Pilih salah satu modul yang ingin disimulasikan, misalnya modul Publikasi:
+    Pilih modul yang ingin disimulasikan:
+    
+    *Simulasi Abdimas:*
     ```bash
-    streamlit run publikasi.py
+    streamlit run abdimas.py
     ```
-    *(Ganti nama file sesuai kebutuhan: `hki.py`, `research.py`, atau `kelembagaan.py`)*
+    
+    *Simulasi SDM:*
+    ```bash
+    streamlit run sdm.py
+    ```
+    
+    *(Ganti nama file sesuai kebutuhan modul lainnya)*
 
 ---
 
-## 🔮 Roadmap & Upcoming Features
+## 🔮 Roadmap
 
-Project ini terus dikembangkan untuk mencakup seluruh aspek penilaian SINTA. Rencana pengembangan selanjutnya meliputi:
+- [x] **Simulasi Publikasi**
+- [x] **Simulasi Penelitian (Research)**
+- [x] **Simulasi HKI**
+- [x] **Simulasi Kelembagaan**
+- [x] **Simulasi Pengabdian Masyarakat (Community Service)**
+- [x] **Simulasi SDM (Sumber Daya Manusia)**
+- [ ] **Stabilisasi Main Dashboard (`main.py`):** Perbaikan bug integrasi state antar halaman.
+- [ ] **Prediksi Persentase Cluster Mandiri:** Finalisasi logika ambang batas skor total.
 
-- [ ] **Simulasi Pengabdian Masyarakat (Community Service):** Perhitungan skor kinerja pengabdian kepada masyarakat.
-- [ ] **Simulasi SDM (Sumber Daya Manusia):** Perhitungan skor berdasarkan kualifikasi dosen (S3, Guru Besar, Lektor Kepala, dll).
-- [ ] **Prediksi Persentase Cluster Mandiri:** Fitur pamungkas yang menggabungkan seluruh skor dari modul-modul di atas untuk memprediksi probabilitas (persentase) universitas masuk ke Cluster Mandiri secara *real-time*.
+---
 
+## 📅 Update Log
+
+**[2025-12-09] - Update Modul Baru**
+* ✅ **Added:** Menambahkan modul simulasi Pengabdian Masyarakat (`abdimas.py`).
+* ✅ **Added:** Menambahkan modul simulasi SDM (`sdm.py`).
+* ⚠️ **WIP:** Menambahkan `main.py` sebagai navigasi utama (Status: *On Progress/Debugging*).
+
+---
 ## 🤝 Kontribusi
 
-Kontribusi sangat terbuka! Jika Anda memiliki pembaruan rumus SINTA terbaru atau ingin memperbaiki bug, silakan buat *Pull Request* atau buka *Issue*.
-
----
-*Dibuat untuk keperluan simulasi strategis peningkatan pemeringkatan perguruan tinggi.*
+Kontribusi sangat terbuka! Jika Anda memiliki perbaikan untuk `main.py` atau pembaruan rumus, silakan buat *Pull Request* atau buka *Issue*.
